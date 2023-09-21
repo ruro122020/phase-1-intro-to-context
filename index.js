@@ -13,10 +13,7 @@ const createEmployeeRecord = (array) => {
 
 const createEmployeeRecords = (array) => {
     const employeeRecords = array.map(employeeData => {
-        const employee = {
-            firstName: employeeData[0]
-        }
-        return employee
+       return createEmployeeRecord(employeeData)
     })
     return employeeRecords
 }
@@ -30,6 +27,7 @@ const createTimeInEvent = (employeeObj, dateTimeString) => {
     employeeObj.timeInEvents.push(timeInEvent)
     return employeeObj
 }
+
 
 const createTimeOutEvent = (employeeObj, dateTimeString) => {
     const timeOutEvent = {
@@ -65,24 +63,11 @@ const allWagesFor = (employee) => {
     const totalWages = wages.reduce((wage1, wage2) => wage1 + wage2)
     return totalWages
 }
-/*
-Given an array of multiple employees. CalculatePayroll aggregates all the dates' wages and adds them together
-This means to get the total wages of each employee for every day that they worked and then add them all together
-
-psudo code:
-initialize an empty array(this will hold the total wages for each employee)
-iterate through the array
-    call the allWagesFor function on each employee
-    push the returned value to the empty array
-
-add all the numbers in the array
-return the value
-*/
 const calculatePayroll = (array) => {
+
     let totalWagesPerEmployee = []
     for (let employee of array) {
         totalWagesPerEmployee.push(allWagesFor(employee))
     }
     return totalWagesPerEmployee.reduce((a, b) => a + b)
-
 }
